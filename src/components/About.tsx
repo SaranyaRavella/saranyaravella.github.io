@@ -15,7 +15,7 @@ const About = () => {
                 About Me
             </motion.h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '50px' }}>
+            <div className="grid-2-col">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}

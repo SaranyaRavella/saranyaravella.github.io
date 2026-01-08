@@ -16,8 +16,8 @@ const Experience = () => {
                 Where I've Worked
             </motion.h2>
 
-            <div style={{ display: 'flex' }}>
-                <div style={{ position: 'relative', width: 'max-content' }}>
+            <div className="experience-container">
+                <div className="experience-tabs" style={{ position: 'relative', width: 'max-content' }}>
                     <div style={{
                         position: 'absolute',
                         top: 0,
@@ -42,6 +42,7 @@ const Experience = () => {
                         <button
                             key={i}
                             onClick={() => setActiveTab(i)}
+                            className="experience-tab-btn"
                             style={{
                                 display: 'block',
                                 width: '100%',
@@ -64,7 +65,7 @@ const Experience = () => {
                     ))}
                 </div>
 
-                <div style={{ marginLeft: '30px' }}>
+                <div className="experience-content" style={{ marginLeft: '30px', flex: 1 }}>
                     {resumeData.experience.map((job, i) => (
                         activeTab === i && (
                             <motion.div

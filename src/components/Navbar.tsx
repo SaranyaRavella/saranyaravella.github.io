@@ -21,6 +21,8 @@ const Navbar = () => {
         { name: 'Contact', href: '#contact' },
     ];
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <motion.nav
             initial={{ y: -100 }}
@@ -42,12 +44,23 @@ const Navbar = () => {
                 zIndex: 100,
                 transition: 'all 0.3s ease'
             }}
+            className="container"
         >
-            <div style={{ color: 'var(--primary)', fontSize: '24px', fontWeight: 700, letterSpacing: '1px' }}>
+            <div style={{ color: 'var(--primary)', fontSize: '24px', fontWeight: 700, letterSpacing: '1px', zIndex: 1001 }}>
                 SR.
             </div>
 
-            <ul style={{ display: 'flex', gap: '30px' }}>
+            {/* Mobile Toggle */}
+            <button
+                className="mobile-nav-toggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+                style={{ color: 'var(--primary)', fontSize: '24px', zIndex: 1001 }}
+            >
+                {menuOpen ? '✕' : '☰'}
+            </button>
+
+            {/* Desktop Nav */}
+            <ul className="desktop-nav" style={{ display: 'flex', gap: '30px' }}>
                 {navLinks.map((link, i) => (
                     <motion.li
                         key={i}
@@ -62,6 +75,24 @@ const Navbar = () => {
                     </motion.li>
                 ))}
             </ul>
+
+            {/* Mobile Nav Overlay */}
+            <div className={`mobile-nav-overlay ${menuOpen ? 'open' : ''}`}>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '40px', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                    {navLinks.map((link, i) => (
+                        <li key={i}>
+                            <a
+                                href={link.href}
+                                onClick={() => setMenuOpen(false)}
+                                style={{ color: 'var(--text-primary)', fontSize: '20px', fontFamily: 'var(--font-mono)' }}
+                            >
+                                <span style={{ color: 'var(--primary)', marginRight: '10px' }}>0{i + 1}.</span>
+                                {link.name}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </motion.nav>
     );
 };
